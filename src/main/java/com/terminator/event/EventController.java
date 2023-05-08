@@ -19,6 +19,12 @@ public class EventController {
         return Response.ok(repository.findAll().list()).build();
     }
 
+    @GET
+    @Path("/ordered")
+    public Response ordered(){
+        return Response.ok(repository.findOrderByTitle()).build();
+    }
+
     @POST
     public Response save(Event event){
         repository.persist(event);
@@ -27,8 +33,15 @@ public class EventController {
 
     @GET
     @Path("/{id}")
-    public Response getByid(@PathParam("id") String id){
+    public Response getById(@PathParam("id") String id){
         Event event = repository.findById(new ObjectId(id));
+        return Response.ok(event).build();
+    }
+
+    @GET
+    @Path("/{title}")
+    public Response getByTitle(@PathParam("title") String title){
+        Event event = repository.findByTitle(title);
         return Response.ok(event).build();
     }
 
