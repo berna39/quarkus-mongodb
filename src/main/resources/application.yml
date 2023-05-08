@@ -1,4 +1,9 @@
 quarkus:
+  vault:
+    url: http://localhost:8200
+    secret-config-kv-path: quarkus-mongodb
+    authentication:
+      client-token: hvs.KJ0RYm4HbAdvumxlUOehMHez
   mongodb:
-    connection-string: mongodb://localhost:27017
-    database: events
+    connection-string: ${secret.connection-string}
+    database: ${secret.database}
